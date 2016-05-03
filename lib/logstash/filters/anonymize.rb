@@ -38,10 +38,10 @@ class LogStash::Filters::Anonymize < LogStash::Filters::Base
     
     @fields.each do |field|
       next unless event.include?(field)
-      if event[field].is_a?(Array)
-        event[field] = event[field].collect { |v| anonymize(v) }
+      if event.get(field).is_a?(Array)
+        event.set(field, event.get(field).collect { |v| anonymize(v) })
       else
-        event[field] = anonymize(event[field])
+        event.set(field, anonymize(event.get(field)))
       end
     end
   end # def filter
