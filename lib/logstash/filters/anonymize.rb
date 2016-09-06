@@ -2,6 +2,8 @@
 require "logstash/filters/base"
 require "logstash/namespace"
 
+ANONYMIZEFAILURE_TAG = "_anonymizefailure"
+
 # Anonymize fields using by replacing values with a consistent hash.
 class LogStash::Filters::Anonymize < LogStash::Filters::Base
   config_name "anonymize"
@@ -53,6 +55,7 @@ class LogStash::Filters::Anonymize < LogStash::Filters::Base
       IPAddr.new(ip_string).mask(@key.to_i).to_s.force_encoding(Encoding::UTF_8)
     rescue ArgumentError => e
       @logger.error("Anonymize: Invalid IP address received", :field => field, :value => ip_string, :exception => e, :backtrace => e.backtrace)
+      event.tag(ANONYMIZEFAILURE_TAG)
       return ip_string
     end
   end
