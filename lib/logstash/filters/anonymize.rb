@@ -39,26 +39,31 @@ class LogStash::Filters::Anonymize < LogStash::Filters::Base
     @fields.each do |field|
       next unless event.include?(field)
       if event.get(field).is_a?(Array)
-        event.set(field, event.get(field).collect { |v| anonymize(v) })
+        event.set(field, event.get(field).collect { |v| anonymize(event, field, v) })
       else
-        event.set(field, anonymize(event.get(field)))
+        event.set(field, anonymize(event, field, event.get(field)))
       end
     end
   end # def filter
 
   private
-  def anonymize_ipv4_network(ip_string)
-    # in JRuby 1.7.11 outputs as US-ASCII
-    IPAddr.new(ip_string).mask(@key.to_i).to_s.force_encoding(Encoding::UTF_8)
+  def anonymize_ipv4_network(event, field, ip_string)
+    begin
+      # in JRuby 1.7.11 outputs as US-ASCII
+      IPAddr.new(ip_string).mask(@key.to_i).to_s.force_encoding(Encoding::UTF_8)
+    rescue ArgumentError => e
+      @logger.error("Anonymize: Invalid IP address received", :field => field, :value => ip_string, :exception => e, :backtrace => e.backtrace)
+      return ip_string
+    end
   end
 
-  def anonymize_openssl(data)
+  def anonymize_openssl(event, field, data)
     digest = algorithm()
     # in JRuby 1.7.11 outputs as ASCII-8BIT
     OpenSSL::HMAC.hexdigest(digest, @key, data).force_encoding(Encoding::UTF_8)
   end
 
-  def anonymize_murmur3(value)
+  def anonymize_murmur3(event, field, value)
     case value
     when Fixnum
       MurmurHash3::V32.int_hash(value)
