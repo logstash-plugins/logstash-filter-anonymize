@@ -15,7 +15,7 @@ class LogStash::Filters::Anonymize < LogStash::Filters::Base
   config :key, :validate => :string, :required => true
 
   # digest/hash type
-  config :algorithm, :validate => ['SHA1', 'SHA256', 'SHA384', 'SHA512', 'MD5', "MURMUR3", "IPV4_NETWORK"], :required => true, :default => 'SHA1'
+  config :algorithm, :validate => ['SHA1', 'SHA256', 'SHA384', 'SHA512', 'MD5', "MURMUR3", "IPV4_NETWORK"], :default => 'SHA1'
 
   public
   def register

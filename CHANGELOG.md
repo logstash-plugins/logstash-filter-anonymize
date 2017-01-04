@@ -1,3 +1,6 @@
+## 3.0.3
+  - The `algorithm` parameter was incorrectly marked as being required.
+
 ## 3.0.2
   - Relax constraint on logstash-core-plugin-api to >= 1.60 <= 2.99
 
