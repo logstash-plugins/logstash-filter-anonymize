@@ -2,7 +2,9 @@
 require "logstash/filters/base"
 require "logstash/namespace"
 
-# Anonymize fields using by replacing values with a consistent hash.
+# deprecated[3.0.3,We recommend that you use the <<plugins-filters-fingerprint,fingerprint filter plugin>> instead.]
+#
+# Anonymize fields by replacing values with a consistent hash.
 class LogStash::Filters::Anonymize < LogStash::Filters::Base
   config_name "anonymize"
 
