@@ -11,9 +11,9 @@ class LogStash::Filters::Anonymize < LogStash::Filters::Base
   # The fields to be anonymized
   config :fields, :validate => :array, :required => true
 
-  # Hashing key
+  # Hashing key.
   # When using MURMUR3 the key is ignored but must still be set.
-  # When using IPV4_NETWORK key is the subnet prefix lentgh
+  # When using IPV4_NETWORK key is the subnet prefix length
   config :key, :validate => :string, :required => true
 
   # digest/hash type
