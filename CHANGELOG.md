@@ -1,3 +1,6 @@
+## 3.0.5
+  - Fix some documentation issues
+
 ## 3.0.3
   - Docs: Deprecate this plugin and recommend using the fingerprint filter
   plugin instead.
