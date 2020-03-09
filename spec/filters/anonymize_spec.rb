@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "logstash/devutils/rspec/spec_helper"
+require "insist"
 require "logstash/filters/anonymize"
 
 describe LogStash::Filters::Anonymize do
