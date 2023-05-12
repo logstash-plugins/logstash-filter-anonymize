@@ -1,3 +1,6 @@
+## 3.0.7
+  - pin murmurhash3 to 0.1.6 [#16](https://github.com/logstash-plugins/logstash-filter-anonymize/pull/16)
+
 ## 3.0.6
   - Update gemspec summary
 
