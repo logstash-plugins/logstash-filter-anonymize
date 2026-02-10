@@ -1,3 +1,6 @@
+## 3.0.8
+  - Fix: replace deprecated `Fixnum` constant with `Integer` for Ruby 3.2+ (JRuby 10) compatibility [#17](https://github.com/logstash-plugins/logstash-filter-anonymize/pull/17)
+
 ## 3.0.7
   - pin murmurhash3 to 0.1.6 [#16](https://github.com/logstash-plugins/logstash-filter-anonymize/pull/16)
 
