@@ -1,3 +1,6 @@
+## 3.0.8
+  - Fix `NameError: uninitialized constant Fixnum` when using the `MURMUR3` algorithm on Logstash 9.4+ (Ruby 3.2+, which removed `Fixnum` in favor of `Integer`) [#19](https://github.com/logstash-plugins/logstash-filter-anonymize/pull/19)
+
 ## 3.0.7
   - pin murmurhash3 to 0.1.6 [#16](https://github.com/logstash-plugins/logstash-filter-anonymize/pull/16)
 
