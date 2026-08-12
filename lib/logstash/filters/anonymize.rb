@@ -62,7 +62,7 @@ class LogStash::Filters::Anonymize < LogStash::Filters::Base
 
   def anonymize_murmur3(value)
     case value
-    when Fixnum
+    when Integer # was Fixnum, removed in Ruby 3.2 (Logstash 9.4+); unified into Integer since Ruby 2.4
       MurmurHash3::V32.int_hash(value)
     when String
       MurmurHash3::V32.str_hash(value)

@@ -1,0 +1,25 @@
+name: Plugin Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  unit-tests:
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+    uses: logstash-plugins/.ci/.github/workflows/unit-tests.yml@1.x
+    secrets: inherit
+    with:
+      elastic-stack-versions: '["8.current","9.previous","9.current","main"]'
+      timeout-minutes: 60
